@@ -82,10 +82,17 @@ for phase in $(seq 1 "$total_phases"); do
     sed -n "${phase_start},${phase_end}p" "$TASKS_FILE" > "$temp_file"
 
     # Count tasks
-    total=$(grep -c "^- \[" "$temp_file" || echo 0)
-    complete=$(grep -c "^- \[x\]" "$temp_file" || echo 0)
-    pending=$(grep -c "^- \[ \]" "$temp_file" || echo 0)
-    simplified=$(grep -c "^- \[~\]" "$temp_file" || echo 0)
+    total=$(grep -c "^- \[" "$temp_file" 2>/dev/null || true)
+    [ -z "$total" ] && total=0
+
+    complete=$(grep -c "^- \[x\]" "$temp_file" 2>/dev/null || true)
+    [ -z "$complete" ] && complete=0
+
+    pending=$(grep -c "^- \[ \]" "$temp_file" 2>/dev/null || true)
+    [ -z "$pending" ] && pending=0
+
+    simplified=$(grep -c "^- \[~\]" "$temp_file" 2>/dev/null || true)
+    [ -z "$simplified" ] && simplified=0
 
     if [ "$total" -gt 0 ]; then
         percent=$((complete * 100 / total))
@@ -142,10 +149,17 @@ done
 echo "## 📈 Overall Progress"
 echo ""
 
-total_all_tasks=$(grep -c "^- \[" "$TASKS_FILE" || echo 0)
-complete_all_tasks=$(grep -c "^- \[x\]" "$TASKS_FILE" || echo 0)
-pending_all_tasks=$(grep -c "^- \[ \]" "$TASKS_FILE" || echo 0)
-simplified_all_tasks=$(grep -c "^- \[~\]" "$TASKS_FILE" || echo 0)
+total_all_tasks=$(grep -c "^- \[" "$TASKS_FILE" 2>/dev/null || true)
+[ -z "$total_all_tasks" ] && total_all_tasks=0
+
+complete_all_tasks=$(grep -c "^- \[x\]" "$TASKS_FILE" 2>/dev/null || true)
+[ -z "$complete_all_tasks" ] && complete_all_tasks=0
+
+pending_all_tasks=$(grep -c "^- \[ \]" "$TASKS_FILE" 2>/dev/null || true)
+[ -z "$pending_all_tasks" ] && pending_all_tasks=0
+
+simplified_all_tasks=$(grep -c "^- \[~\]" "$TASKS_FILE" 2>/dev/null || true)
+[ -z "$simplified_all_tasks" ] && simplified_all_tasks=0
 
 if [ "$total_all_tasks" -gt 0 ]; then
     overall_percent=$((complete_all_tasks * 100 / total_all_tasks))
