@@ -306,7 +306,32 @@ specify check                       # Verify installation
 
 ## Analysis Scripts
 
-The SDD skill includes Python analysis scripts for deep quality validation during \`/speckit.analyze\`:
+The SDD skill includes analysis scripts for deep quality validation and progress tracking:
+
+### \`scripts/phase_summary.sh\`
+Generates a comprehensive progress report across all phases in a tasks.md file:
+- Shows completion percentage for each phase
+- Lists pending tasks per phase
+- Highlights simplified/modified tasks
+- Provides overall progress statistics
+- Supports any SDD feature's tasks.md file
+
+**Usage:**
+\`\`\`bash
+~/.claude/skills/sdd/scripts/phase_summary.sh specs/003-keyboard-shortcuts/tasks.md
+\`\`\`
+
+**Output:** Markdown-formatted phase-by-phase progress report with:
+- Phase-by-phase completion percentages
+- Pending task lists (up to 5 per phase)
+- Simplified task warnings
+- Overall feature progress summary
+
+**When to Use:**
+- Check progress on any SDD feature
+- Get quick overview of what's complete vs pending
+- Identify phases that need attention
+- Generate status reports for stakeholders
 
 ### \`scripts/analyze-requirements.py\`
 Analyzes requirement coverage across spec.md and tasks.md:
