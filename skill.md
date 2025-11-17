@@ -1,7 +1,7 @@
 ---
 name: sdd
-description: This skill should be used when users want guidance on Spec-Driven Development methodology using GitHub's Spec-Kit. Guide users through executable specification workflows for both new projects (greenfield) and existing codebases (brownfield). After any SDD command generates artifacts (constitution, specs, plans, tasks), automatically summarize the created content and present it to the user for feedback before proceeding to the next step. This keeps users in the loop while maintaining agile velocity.
-version: 2.0.0
+description: This skill should be used when users want guidance on Spec-Driven Development methodology using GitHub's Spec-Kit. Guide users through executable specification workflows for both new projects (greenfield) and existing codebases (brownfield). After any SDD command generates artifacts, automatically provide structured 10-point summaries with feature status tracking, enabling natural language feature management and keeping users engaged throughout the process.
+version: 2.1.0
 triggers:
   - spec-driven development
   - spec kit
@@ -26,6 +26,13 @@ triggers:
   - reverse engineer
   - codebase analysis
   - iterative enhancement
+  - feature status
+  - track features
+  - add feature
+  - move feature
+  - reorder features
+  - feature progress
+  - feature dependencies
 author: Based on GitHub Spec-Kit by Den Delimarsky and John Lam
 license: MIT
 tags:
@@ -124,44 +131,89 @@ Works with:
      - **For tasks.md**: Number of tasks, major task categories, dependencies
      - **For analysis reports**: Current patterns, tech debt, integration points
 
-3. **Present Concise Summary**
-   - Highlight the most important decisions/content (3-5 bullet points)
+3. **Present Structured Summary** (Use 10-Point Template Below)
+   - Show what was generated and why
+   - Highlight the most important decisions with rationale
+   - Include quality indicators and watch-outs
    - Keep summary focused and actionable
-   - Use clear headings for each artifact type
+   - Use clear headings for each section
 
-4. **Offer Feedback Options**
+4. **Include Feature Status** (Hybrid Approach)
+   - Brief status line in every summary
+   - Detailed status on demand with `/speckit.status`
+   - See "Feature Status Tracking" section below
+
+5. **Offer Feedback Options**
    - **Option A**: "Looks good, proceed to next step"
    - **Option B**: "I'd like to modify [specific section]"
    - **Option C**: "Regenerate with these changes: [user input]"
    - **Option D**: "Explain why [specific decision] was made"
 
-### Example Summarization After \`/speckit.specify\`
+### 10-Point Summary Template
+
+Use this structured format after ANY SDD command completes:
+
+```
+## ✅ [Command Name] Completed - Here's What Just Happened
+
+### 🎯 Key Decisions Made (Top 3)
+1. [Decision] - **Rationale:** [Why this was chosen]
+2. [Decision] - **Rationale:** [Why this was chosen]
+3. [Decision] - **Rationale:** [Why this was chosen]
+
+### 📋 What Was Generated
+- [Artifact 1]: [Brief description of content]
+- [Artifact 2]: [Brief description of content]
+
+### 🔍 Important Items to Review (Top 3)
+1. [Critical item to check and why it matters]
+2. [Important detail to verify and potential impact]
+3. [Edge case to consider and how it affects the design]
+
+### ⚠️ Watch Out For (Top 2)
+- [Potential issue or gotcha] - **How to avoid:** [Guidance]
+- [Common mistake] - **How to avoid:** [Guidance]
+
+### 🔄 What This Enables Next (2 Options)
+- **Option 1:** [Next step] - Best if: [Condition]
+- **Option 2:** [Alternative step] - Best if: [Condition]
+
+📊 **Feature Status:** [Current Feature Name] ([Stage]) → Next: [Next Feature]
+   Progress: [●●●○○] [X]% | Completed: [N] of [Total] features | Dependencies: [Status]
+
+**Your options:** [A] Proceed [B] Modify [C] Explain more [D] Show full status
+```
+
+### Example: Enhanced Summarization After \`/speckit.specify\`
 
 \`\`\`
-## Specification Created ✓
+## ✅ Specify Completed - Here's What Just Happened
 
-I've generated spec.md with the following key requirements:
+### 🎯 Key Decisions Made
+1. **Authentication: JWT tokens** - Rationale: Stateless architecture, horizontally scalable, industry standard
+2. **Password requirements: 12+ characters with complexity** - Rationale: Balances security (NIST guidelines) with usability
+3. **Session timeout: 24 hours** - Rationale: Standard for web apps, balances security vs user convenience
 
-**Core Features:**
-- Photo album organization with drag-and-drop interface
-- Date-based grouping (no nested albums)
-- Tile-based preview within albums
+### 📋 What Was Generated
+- \`.speckit/features/user-auth/specify.md\`: Complete requirements with 5 user stories, 8 success criteria, 3 edge cases
 
-**Success Criteria:**
-- Albums load within 2 seconds
-- Drag-and-drop supports 100+ photos without lag
-- Accessible keyboard navigation (WCAG 2.1 AA)
+### 🔍 Important Items to Review
+1. **Password reset flow** - Verify email requirements match your infrastructure (SMTP server, templates)
+2. **Multi-factor authentication** - Currently marked as "future enhancement"; may need to be in MVP
+3. **Rate limiting** - Set at 5 login attempts per 15 min; consider if this fits your security policy
 
-**Key Constraints:**
-- No photo uploads to external servers
-- Local SQLite for metadata storage
+### ⚠️ Watch Out For
+- **Email service dependency not specified** - How to avoid: Add email service to plan.md dependencies
+- **GDPR compliance for user data** - How to avoid: Review data retention and user deletion requirements
 
-**Next Step:** Run \`/speckit.plan\` to define technical architecture
+### 🔄 What This Enables Next
+- **Option 1:** Run \`/speckit.plan\` to design technical implementation - Best if: Requirements look good
+- **Option 2:** Modify specify.md - Best if: You need to adjust requirements or add features
 
-How does this look? Would you like to:
-A) Proceed to planning phase
-B) Modify any requirements
-C) Add additional success criteria
+📊 **Feature Status:** user-authentication (Specified) → Next: profile-management
+   Progress: [●●○○○] 40% | Completed: 1 of 5 features | Dependencies: database-setup ✅
+
+**Your options:** [A] Proceed to planning [B] Modify requirements [C] Explain JWT choice [D] Show full status
 \`\`\`
 
 ### When to Skip Summarization
@@ -173,10 +225,200 @@ Only skip the summarization step when:
 
 ### Benefits of This Workflow
 
-- **Keeps user engaged**: No "black box" artifact generation
+- **Eliminates "black box" feeling**: Clear explanations of what was generated and why
 - **Enables early feedback**: Catch misunderstandings before implementation
-- **Maintains agility**: Quick review, not lengthy approval processes
-- **Builds trust**: User sees the AI's reasoning and decisions
+- **Maintains agility**: Quick review with structured format, not lengthy approval processes
+- **Builds trust**: User sees the AI's reasoning and decisions with rationale
+- **Provides context**: Feature status keeps users oriented in the overall project
+
+## Feature Status Tracking
+
+### Hybrid Approach
+
+After every SDD command, include a **brief feature status line** in the summary. Provide **detailed status on demand** with `/speckit.status`.
+
+### Brief Status Line Format
+
+Include this at the end of every summary:
+
+```
+📊 **Feature Status:** [Current Feature Name] ([Stage]) → Next: [Next Feature Name]
+   Progress: [●●●○○] [X]% | Completed: [N] of [Total] features | Dependencies: [Dep] ✅/⏸️
+```
+
+**Stage values:**
+- `Specifying` (20% complete)
+- `Planning` (40% complete)
+- `Tasking` (60% complete)
+- `In Progress` (80% complete)
+- `Complete` (100% complete)
+
+**Progress indicator:**
+- Use filled circles (●) for completed stages
+- Use empty circles (○) for pending stages
+- Calculate percentage based on stage
+
+### Detailed Status Dashboard
+
+When user requests full status (option D) or runs `/speckit.status`, show:
+
+```
+📊 Project Feature Status Dashboard
+
+🎯 CURRENT FEATURE
+├─ [feature-name] ([Stage] - [X]% complete)
+│  ├─ ✅ Requirements specified
+│  ├─ 🔄 Implementation plan in progress
+│  ├─ ⏸️  Tasks not started
+│  └─ ⏸️  Implementation not started
+│  Blockers: [None | Description]
+│  Dependencies: [feature-name] ✅
+
+✅ COMPLETED FEATURES ([N])
+├─ [feature-1] (100% complete)
+└─ [feature-2] (100% complete)
+
+📋 UPCOMING FEATURES ([N])
+├─ [feature-3] (depends on: [current-feature])
+└─ [feature-4] (depends on: [feature-3])
+
+⚠️  BLOCKED FEATURES ([N])
+[List any features that are blocked with reasons]
+```
+
+### Natural Language Feature Management
+
+Claude should automatically detect and handle natural language feature management requests:
+
+**User says:** "Move feature XYZ before ABC"
+**Claude does:**
+1. Reads current feature list from `.speckit/features/`
+2. Shows current order with numbers
+3. Proposes new order
+4. Asks for confirmation
+5. Updates feature priority/order in constitution or plan
+6. Shows updated status dashboard
+
+**User says:** "Add a new feature for email notifications"
+**Claude does:**
+1. Detects new feature request
+2. Asks clarifying questions (priority, dependencies, description)
+3. Generates feature spec outline
+4. Inserts into feature list at appropriate position
+5. Shows updated status dashboard
+
+**User says:** "Let's do profile-management first"
+**Claude does:**
+1. Identifies current feature order
+2. Proposes moving profile-management to top priority
+3. Adjusts dependencies if needed
+4. Updates artifacts
+5. Shows updated status
+
+**Detection patterns:**
+- "Move [feature] before/after [other]" → Reorder
+- "Add [feature]" → New feature
+- "Let's do [feature] first" → Move to top priority
+- "Skip [feature] for now" → Mark as deferred
+- "We finished [feature]" → Update status to complete
+- "What features depend on [feature]?" → Show dependency tree
+- "Show feature status" → Display full dashboard
+
+### Quick Feature Operations
+
+Guide users through these operations when requested:
+
+**Add Feature:**
+```
+User: "Add a feature for admin dashboard"
+Claude:
+1. What's the priority? (High/Medium/Low)
+2. What features does this depend on? (user-auth, profile-management, etc.)
+3. Brief description?
+[Creates outline, shows updated status]
+```
+
+**Reorder Features:**
+```
+User: "Reorder features"
+Claude:
+Current order:
+1. user-authentication
+2. profile-management
+3. admin-dashboard
+4. email-notifications
+5. reporting
+
+How would you like to reorder? (provide new numbers or describe changes)
+[Updates order, shows new status]
+```
+
+**Remove Feature:**
+```
+User: "Remove the reporting feature"
+Claude:
+⚠️  Warning: This will remove 'reporting' feature.
+Dependencies affected: None
+Are you sure? (yes/no)
+[If yes: removes, updates status]
+```
+
+### Progress Calculation
+
+Automatically calculate progress based on SDD workflow completion:
+
+| Stage | Progress | Indicators |
+|-------|----------|------------|
+| **Specified** | 20% | `specify.md` exists |
+| **Planned** | 40% | `plan.md` exists |
+| **Tasked** | 60% | `tasks.md` exists |
+| **In Progress** | 80% | Implementation started (code files modified) |
+| **Complete** | 100% | Implementation complete, tests pass |
+
+### Dependency Tracking
+
+Track and visualize dependencies:
+
+**Show dependencies:**
+```
+user-authentication
+├─ Depends on: database-setup ✅
+└─ Blocks: profile-management ⏸️, admin-dashboard ⏸️
+```
+
+**Check if ready:**
+```
+📊 Can we start profile-management?
+   Checking dependencies...
+   ✅ user-authentication (complete)
+   ✅ database-setup (complete)
+
+   All dependencies satisfied! Ready to proceed.
+```
+
+**Detect circular dependencies:**
+```
+⚠️  Warning: Circular dependency detected
+   feature-A depends on feature-B
+   feature-B depends on feature-C
+   feature-C depends on feature-A
+
+   Please resolve this before proceeding.
+```
+
+### Integration with Workflows
+
+**For Greenfield Projects:**
+- After `/speckit.specify`, ask if there are multiple features
+- If yes, list them and track progress through each
+- Show status after each command
+
+**For Brownfield Projects:**
+- After `/speckit.reverse-engineer`, create feature list from discovered functionality
+- Track new features separately from existing documented features
+- Show integration impact on status
+
+For complete feature management guidance, see [Feature Management Guide](references/feature_management.md).
 
 ## How to Use This Skill
 

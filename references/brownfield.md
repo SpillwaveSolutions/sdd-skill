@@ -1,5 +1,7 @@
 # Brownfield Workflow: Bringing SDD to Existing Codebases
 
+**Note:** All summarization sections in this guide should use the **10-point summary template** from SKILL.md, with feature status tracking when applicable.
+
 ## When to Use Brownfield Workflow
 
 Use this workflow when:
@@ -95,48 +97,38 @@ edge cases, and architectural decision rationale
 
 **After this step - Summarize the analysis report:**
 
-Present a concise summary of the codebase analysis highlighting:
-- Architecture and design patterns discovered
-- Technology stack and key dependencies
-- Coding standards and conventions observed
-- Identified technical debt or areas for improvement
+Use the **10-point summary template** from SKILL.md to present the codebase analysis.
 
-**Example summary:**
+**Example enhanced summary:**
 ```
-## Codebase Analysis Complete ✓
+## ✅ Brownfield Analysis Completed - Here's What Just Happened
 
-I've analyzed the existing codebase and identified the following:
+### 🎯 Key Decisions Made
+1. **Microservices architecture identified (5 services)** - Rationale: Modular design allows independent feature development
+2. **TypeScript with strict mode across codebase** - Rationale: Strong type safety culture; maintain this in new features
+3. **Event-driven communication via RabbitMQ** - Rationale: Async messaging pattern; new features should follow this pattern
 
-**Architecture & Patterns:**
-- Microservices architecture (5 services)
-- RESTful APIs with Express.js
-- Event-driven communication via RabbitMQ
-- PostgreSQL with Sequelize ORM
+### 📋 What Was Generated
+- Codebase analysis report: Architecture patterns, tech stack, coding standards, technical debt assessment
 
-**Technology Stack:**
-- Backend: Node.js 18, Express, TypeScript
-- Frontend: React 18, Redux Toolkit, Material-UI
-- Database: PostgreSQL 14, Redis for caching
-- Infrastructure: Docker, Kubernetes
+### 🔍 Important Items to Review
+1. **65% test coverage (target: 80%)** - New features should increase coverage; plan for testing investment
+2. **Some services lack error handling** - When adding features, prioritize services with weak error handling
+3. **API documentation needs updates** - Document new endpoints comprehensively as part of feature work
 
-**Coding Standards Observed:**
-- TypeScript with strict mode enabled
-- ESLint + Prettier for code formatting
-- Jest for unit testing (65% coverage currently)
-- Conventional Commits for Git messages
+### ⚠️ Watch Out For
+- **Redux state management complexity** - How to avoid: Consider simpler state solutions for new features or plan Redux refactor
+- **RabbitMQ dependency** - How to avoid: Ensure local RabbitMQ setup for development; document in constitution
 
-**Technical Debt & Opportunities:**
-- Some services lack comprehensive error handling
-- Redux state management could be simplified
-- API documentation needs updates
-- Test coverage below target (80%)
+### 🔄 What This Enables Next
+- **Option 1:** Run `specify init --here --force` to set up SDD - Best if: Analysis looks complete
+- **Option 2:** Deep dive into specific services - Best if: Need more architectural details
+- **Option 3:** Analyze dependencies and integration points - Best if: Planning complex feature integration
 
-**Next Step:** Run `specify init --here --force` to set up SDD infrastructure
+📊 **Feature Status:** Analyzing existing codebase (No SDD features yet)
+   Progress: Analysis complete → Next: Initialize SDD infrastructure
 
-Would you like to:
-A) Proceed with SDD initialization
-B) Explore specific areas in more detail
-C) Adjust analysis depth
+**Your options:** [A] Initialize SDD [B] Deep dive specific areas [C] Analyze dependencies [D] Adjust analysis depth
 ```
 
 ### Step 2: Initialize SDD in Existing Project

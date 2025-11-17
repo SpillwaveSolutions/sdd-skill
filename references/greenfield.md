@@ -59,38 +59,37 @@ Launch AI assistant in project directory and use:
 
 **After this step - Summarize constitution.md:**
 
-Read `.speckit/constitution.md` and present a summary highlighting:
-- Core development principles (3-5 key principles)
-- Coding standards and conventions
-- Key constraints or requirements
-- Testing and quality expectations
+Read `.speckit/constitution.md` and use the **10-point summary template** from SKILL.md:
 
-**Example summary:**
+**Example enhanced summary:**
 ```
-## Constitution Created ✓
+## ✅ Constitution Completed - Here's What Just Happened
 
-I've established the project principles in constitution.md:
+### 🎯 Key Decisions Made
+1. **Testing requirement: 80%+ code coverage** - Rationale: Ensures reliability and reduces production bugs
+2. **TypeScript for all code** - Rationale: Type safety catches errors at compile-time, improves maintainability
+3. **Performance target: <3s page load, 60fps** - Rationale: Industry standards for good user experience
 
-**Core Principles:**
-- Code quality first: All features must have unit tests (80%+ coverage)
-- User experience: Consistent design patterns, WCAG 2.1 AA accessibility
-- Performance: Page load under 3 seconds, 60fps interactions
-- Simplicity: Prefer vanilla solutions over complex frameworks
+### 📋 What Was Generated
+- `.speckit/constitution.md`: Complete project principles covering quality, UX, performance, and coding standards
 
-**Coding Standards:**
-- TypeScript for type safety
-- Functional programming patterns preferred
-- Comprehensive JSDoc for all public APIs
+### 🔍 Important Items to Review
+1. **80%+ test coverage requirement** - Verify this is achievable for your team's velocity and timeline
+2. **WCAG 2.1 AA accessibility** - Confirm you have the expertise or resources for accessibility compliance
+3. **TypeScript mandate** - Ensure team is comfortable with TypeScript or plan for learning curve
 
-**Testing Requirements:**
-- Unit tests for business logic
-- Integration tests for API endpoints
-- E2E tests for critical user journeys
+### ⚠️ Watch Out For
+- **Functional programming preference** - How to avoid: May require team training if team is more OOP-oriented
+- **Comprehensive JSDoc requirement** - How to avoid: This adds documentation overhead; ensure team buy-in
 
-Would you like to:
-A) Proceed to feature specification
-B) Adjust any principles
-C) Add additional constraints
+### 🔄 What This Enables Next
+- **Option 1:** Run `/speckit.specify` to define feature requirements - Best if: Principles look good
+- **Option 2:** Modify constitution.md - Best if: You need to adjust standards or add principles
+
+📊 **Feature Status:** Initializing project (Constitution created)
+   Progress: [●○○○○] 0% features (no features specified yet)
+
+**Your options:** [A] Proceed to specification [B] Adjust principles [C] Explain testing requirements [D] Show full status
 ```
 
 ### Step 3: Create the Specification
@@ -108,47 +107,42 @@ C) Add additional constraints
 
 **After this step - Summarize specify.md:**
 
-Read `.speckit/features/[feature-number]/specify.md` and present a summary highlighting:
-- Main functional requirements (top 3-5 features)
-- Key user stories or use cases
-- Success criteria and acceptance criteria
-- Important constraints or non-functional requirements
+Read `.speckit/features/[feature-number]/specify.md` and use the **10-point summary template** from SKILL.md.
 
-**Example summary:**
+**Also ask:** "Do you have multiple features to implement, or is this a single-feature project?" This helps establish feature tracking.
+
+**Example enhanced summary:**
 ```
-## Specification Created ✓
+## ✅ Specify Completed - Here's What Just Happened
 
-I've generated specify.md with the following key requirements:
+### 🎯 Key Decisions Made
+1. **Drag-and-drop interface for album organization** - Rationale: Natural, intuitive interaction for visual content organization
+2. **Local-only storage (no cloud)** - Rationale: Privacy-first approach, no server costs, works offline
+3. **SQLite for metadata** - Rationale: Lightweight, serverless, perfect for local desktop apps
 
-**Core Features:**
-- Photo album organization with drag-and-drop interface
-- Date-based automatic grouping (no nested albums)
-- Tile-based photo preview within albums
-- Local-only storage (no cloud uploads)
+### 📋 What Was Generated
+- `.speckit/features/001-photo-album-manager/specify.md`: 3 core features, 5 user stories, 4 success criteria, 3 edge cases
 
-**User Stories:**
-- As a user, I can create albums and organize photos by dragging
-- As a user, I can view all photos in an album as tiles
-- As a user, I can reorganize albums by date on the main page
+### 🔍 Important Items to Review
+1. **2-second load time for 1000 photos** - Verify this is achievable with thumbnails and lazy loading; may need caching strategy
+2. **HEIC format support** - Check if browser/platform supports HEIC natively or if conversion library needed
+3. **Keyboard navigation requirement** - Review specific keyboard shortcuts needed for accessibility compliance
 
-**Success Criteria:**
-- Albums load within 2 seconds (up to 1000 photos)
-- Drag-and-drop supports 100+ photos without lag
-- Accessible keyboard navigation (WCAG 2.1 AA)
-- Works offline with local SQLite database
+### ⚠️ Watch Out For
+- **No nested albums constraint** - How to avoid: Make sure UI clearly communicates this limitation to users
+- **100+ photo drag-and-drop performance** - How to avoid: May need virtual scrolling or batching for large selections
 
-**Key Constraints:**
-- No photo uploads to external servers
-- Metadata stored locally in SQLite
-- Support for JPEG, PNG, HEIC formats
+### 🔄 What This Enables Next
+- **Option 1:** Run `/speckit.plan` to design technical architecture - Best if: Requirements are clear
+- **Option 2:** Run `/speckit.clarify` to explore edge cases - Best if: You want to refine edge case handling first
+- **Option 3:** Modify specify.md - Best if: Requirements need adjustment
 
-**Next Step:** Run `/speckit.plan` to define technical architecture
+📊 **Feature Status:** photo-album-manager (Specified) → Next: (ask user if more features planned)
+   Progress: [●○○○○] 20% | Completed: 0 of 1 features | Dependencies: None
 
-Would you like to:
-A) Proceed to planning phase
-B) Modify any requirements
-C) Add additional success criteria
-D) Use `/speckit.clarify` to explore edge cases
+**Your options:** [A] Proceed to planning [B] Modify requirements [C] Clarify edge cases [D] Show full status
+
+**Do you have multiple features planned?** If yes, tell me what other features you're considering so I can track them.
 ```
 
 ### Step 4: Create Technical Implementation Plan
@@ -166,49 +160,38 @@ D) Use `/speckit.clarify` to explore edge cases
 
 **After this step - Summarize plan.md:**
 
-Read `.speckit/features/[feature-number]/plan.md` and present a summary highlighting:
-- Technology stack choices and rationale
-- Architecture patterns and design decisions
-- Key dependencies and libraries
-- Implementation milestones or phases
+Read `.speckit/features/[feature-number]/plan.md` and use the **10-point summary template** from SKILL.md.
 
-**Example summary:**
+**Example enhanced summary:**
 ```
-## Technical Plan Created ✓
+## ✅ Plan Completed - Here's What Just Happened
 
-I've created plan.md with the following technical approach:
+### 🎯 Key Decisions Made
+1. **Vite + Vanilla JavaScript** - Rationale: Fast dev experience without framework lock-in; keeps bundle small
+2. **sql.js for SQLite in browser** - Rationale: Client-side database without server; full SQL capabilities
+3. **Web Workers for image processing** - Rationale: Prevents UI blocking when generating thumbnails for large albums
 
-**Technology Stack:**
-- Vite (build tool for fast development)
-- Vanilla JavaScript (no framework overhead)
-- HTML5 Drag-and-Drop API (native functionality)
-- SQLite (local database via sql.js)
-- CSS Grid + Flexbox (responsive layouts)
+### 📋 What Was Generated
+- `.speckit/features/001-photo-album-manager/plan.md`: Complete technical architecture with 5 implementation phases, 3 key dependencies
 
-**Architecture Decisions:**
-- MVC pattern with vanilla JS
-- IndexedDB wrapper for photo metadata
-- Web Workers for image processing
-- Service Worker for offline support
+### 🔍 Important Items to Review
+1. **sql.js browser compatibility** - Verify it works in target browsers (especially Safari); may need fallback to IndexedDB
+2. **Web Worker browser support** - Check that all target browsers support Workers; have fallback for older browsers
+3. **10-day implementation timeline** - Validate this is realistic for your team; includes buffer time?
 
-**Key Dependencies:**
-- sql.js (SQLite in browser)
-- sharp (image thumbnail generation)
-- date-fns (date manipulation)
+### ⚠️ Watch Out For
+- **sharp library is Node.js only** - How to avoid: Use browser-native Canvas API or WebAssembly solution like @squoosh/lib
+- **Service Worker requires HTTPS** - How to avoid: Plan for HTTPS in local dev (Vite supports this) and production
 
-**Implementation Phases:**
-1. Core UI scaffolding (3 days)
-2. Drag-and-drop functionality (2 days)
-3. SQLite integration (2 days)
-4. Image loading and caching (2 days)
-5. Testing and polish (1 day)
+### 🔄 What This Enables Next
+- **Option 1:** Run `/speckit.tasks` to break down into actionable tasks - Best if: Architecture is solid
+- **Option 2:** Modify plan.md - Best if: You want to adjust tech stack or dependencies
+- **Option 3:** Run `/speckit.analyze` to check consistency - Best if: Want to validate against constitution
 
-**Next Step:** Run `/speckit.tasks` to break down into actionable tasks
+📊 **Feature Status:** photo-album-manager (Planned) → Next: (same feature continues to tasks)
+   Progress: [●●○○○] 40% | Completed: 0 of 1 features | Dependencies: None
 
-Would you like to:
-A) Proceed to task breakdown
-B) Adjust technology choices
-C) Explore alternative architectures
+**Your options:** [A] Proceed to tasks [B] Adjust architecture [C] Analyze consistency [D] Show full status
 ```
 
 ### Step 5: Break Down into Tasks
@@ -221,44 +204,39 @@ C) Explore alternative architectures
 
 **After this step - Summarize tasks.md:**
 
-Read `.speckit/features/[feature-number]/tasks.md` and present a summary highlighting:
-- Total number of tasks
-- Major task categories
-- Critical path or dependencies
-- Estimated complexity
+Read `.speckit/features/[feature-number]/tasks.md` and use the **10-point summary template** from SKILL.md.
 
-**Example summary:**
+**Example enhanced summary:**
 ```
-## Tasks Breakdown Created ✓
+## ✅ Tasks Completed - Here's What Just Happened
 
-I've generated tasks.md with 18 actionable tasks:
+### 🎯 Key Decisions Made
+1. **18 tasks organized into 5 categories** - Rationale: Logical grouping by technical domain for clear separation of concerns
+2. **Database setup as early critical path** - Rationale: Many features depend on database; completing early unblocks parallel work
+3. **High complexity tasks: 3 (Database integration, DnD state, Image caching)** - Rationale: These require careful architecture and testing
 
-**Task Categories:**
-- **UI Foundation** (5 tasks): App shell, layouts, routing
-- **Drag-and-Drop** (4 tasks): DnD handlers, visual feedback, persistence
-- **Database Layer** (3 tasks): SQLite setup, schema, CRUD operations
-- **Image Handling** (4 tasks): Loading, thumbnails, caching, format support
-- **Testing & Polish** (2 tasks): Unit tests, E2E tests, accessibility audit
+### 📋 What Was Generated
+- `.speckit/features/001-photo-album-manager/tasks.md`: 18 actionable tasks across UI, DnD, Database, Image handling, Testing
 
-**Critical Dependencies:**
-- Task 3 (Database setup) must complete before Task 7 (Album persistence)
-- Task 5 (Image loader) must complete before Task 9 (Thumbnail generation)
-- All UI tasks (1-5) should complete before drag-and-drop implementation
+### 🔍 Important Items to Review
+1. **10-day timeline estimate** - Realistic for team? Includes testing time? May need buffer for unknowns
+2. **Critical path dependencies** - Database must complete first; this could block progress if delayed
+3. **Testing tasks at the end** - Consider moving some testing earlier (TDD approach) for better quality
 
-**Complexity Estimate:**
-- High complexity: 3 tasks (Database integration, DnD state management)
-- Medium complexity: 9 tasks
-- Low complexity: 6 tasks
+### ⚠️ Watch Out For
+- **3 high-complexity tasks** - How to avoid: Allocate senior developers; consider pairing or extra time estimates
+- **All UI before DnD** - How to avoid: This sequential approach may delay integration; consider overlapping if possible
 
-**Estimated Timeline:** 10 days for full implementation
+### 🔄 What This Enables Next
+- **Option 1:** Run `/speckit.implement` to start implementation - Best if: Tasks are clear and prioritized
+- **Option 2:** Reorder tasks - Best if: You want to adjust priorities or dependencies
+- **Option 3:** Run `/speckit.checklist` for quality verification - Best if: Want comprehensive testing criteria
+- **Option 4:** Run `/speckit.analyze` - Best if: Want to validate task coverage against requirements
 
-**Next Step:** Run `/speckit.implement` to begin execution
+📊 **Feature Status:** photo-album-manager (Tasked - ready for implementation) → Next: Implementation
+   Progress: [●●●○○] 60% | Completed: 0 of 1 features | Dependencies: None
 
-Would you like to:
-A) Start implementation
-B) Reorder or adjust tasks
-C) Run `/speckit.analyze` for consistency check
-D) Generate quality checklist with `/speckit.checklist`
+**Your options:** [A] Start implementation [B] Reorder tasks [C] Generate checklist [D] Show full status
 ```
 
 ### Step 6: Execute Implementation
@@ -298,6 +276,98 @@ Use these for additional quality and validation:
 ```
 
 **Purpose**: Create custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English")
+
+## Managing Multiple Features
+
+### Adding New Features
+
+When working with multiple features in a greenfield project, Claude automatically tracks feature status and helps you manage them.
+
+**Natural Language Commands:**
+
+```
+"Add a new feature for user notifications"
+"Let's work on email integration next"
+"Move the admin dashboard feature before reporting"
+"Show me all planned features"
+"What features depend on user-authentication?"
+```
+
+**Claude will:**
+1. Detect your feature management request
+2. Ask clarifying questions (priority, dependencies, description)
+3. Update the feature list
+4. Show updated feature status dashboard
+
+### Feature Status Tracking
+
+After establishing multiple features (typically after first `/speckit.specify`), Claude tracks:
+
+- **Current feature** being worked on
+- **Completed features** (100% through workflow)
+- **Upcoming features** (not yet started)
+- **Dependencies** between features
+- **Progress** for each feature (Specified, Planned, Tasked, In Progress, Complete)
+
+**Example status display:**
+```
+📊 Project Feature Status Dashboard
+
+🎯 CURRENT FEATURE
+├─ user-authentication (Planning - 40% complete)
+│  ├─ ✅ Requirements specified
+│  ├─ 🔄 Implementation plan in progress
+│  ├─ ⏸️  Tasks not started
+│  └─ ⏸️  Implementation not started
+│  Dependencies: database-setup ✅
+
+✅ COMPLETED FEATURES (1)
+└─ database-setup (100% complete)
+
+📋 UPCOMING FEATURES (2)
+├─ profile-management (depends on: user-authentication)
+└─ admin-dashboard (depends on: user-authentication, profile-management)
+```
+
+### Reordering Features
+
+**User request:** "Let's do profile-management before admin-dashboard"
+
+**Claude response:**
+```
+Current order:
+1. user-authentication (In Progress)
+2. admin-dashboard (Pending)
+3. profile-management (Pending)
+
+Proposed new order:
+1. user-authentication (In Progress)
+2. profile-management (Pending)
+3. admin-dashboard (Pending - will update dependency)
+
+Is this correct? (yes/no)
+```
+
+### Feature Dependencies
+
+Claude automatically tracks dependencies when you mention them:
+
+```
+"User authentication depends on database-setup"
+"Profile management needs user-authentication first"
+```
+
+**Dependency checking:**
+```
+📊 Can we start profile-management?
+   Checking dependencies...
+   ✅ user-authentication (complete)
+   ✅ database-setup (complete)
+
+   All dependencies satisfied! Ready to proceed.
+```
+
+For complete feature management capabilities, see [Feature Management Guide](feature_management.md).
 
 ## Artifacts Generated
 
